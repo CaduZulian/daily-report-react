@@ -61,7 +61,7 @@ export default createGlobalStyle`
     }
 
     body, input, textarea, button {
-        font-family: Source Sans Pro, sans-serif;
+        font-family: sans-serif;
         font-weight: 400;
     }
 

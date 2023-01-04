@@ -34,11 +34,16 @@ const theme = {
 
     background: {
       light: '#F3F5F7',
+      lightGray: '#E9E9E9',
       lightBlue: '#E9EFFC',
       radial:
         'radial-gradient(80.22% 129.52% at 49.85% 152.29%, #223667 0%, #090E1B 100%)',
       white: '#FFFFFF',
       darkGreen: '#055C45',
+    },
+
+    hover: {
+      darkGreen: '#034030',
     },
 
     opacity: {

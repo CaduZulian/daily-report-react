@@ -11,13 +11,24 @@ export const HeaderContainer = styled.header`
   padding: 1rem;
 `;
 
-export const Title = styled.h2`
+export const Logo = styled.div`
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  cursor: pointer;
 
-  font-weight: 500;
-  font-family: sans-serif;
+  img {
+    height: 2.5rem;
+  }
 
-  color: ${({ theme }) => theme.palette.text.light};
+  span {
+    font-weight: 500;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+  
+    color: ${({ theme }) => theme.palette.text.light};
+  }
 `;
 
 export const ButtonsGroup = styled.div`

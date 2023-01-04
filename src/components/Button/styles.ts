@@ -16,4 +16,10 @@ export const StyledButton = styled.button`
   font-size: 1rem;
   color: ${({ theme }) => theme.palette.text.light};
   cursor: pointer;
+
+  transition: all 0.2s ease-in;
+
+  :hover {
+    background-color: ${({theme}) => theme.palette.hover.darkGreen};
+  }
 `;
