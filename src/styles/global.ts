@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
     :root {
@@ -53,7 +54,7 @@ export default createGlobalStyle`
         outline: 0;
         box-sizing: border-box;
         
-        font-family: 'Source Sans Pro';
+        font-family: sans-serif;
     }
 
     *:focus {

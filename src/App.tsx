@@ -12,6 +12,9 @@ import GlobalStyles from "./styles/global";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 
+// toast
+import { ToastContainer } from "react-toastify";
+
 // pages
 import { Home } from "./Pages/Home";
 import { ToClockIn } from "./Pages/ToClockIn";
@@ -30,6 +33,7 @@ function App() {
       </Main>
 
       <GlobalStyles />
+      <ToastContainer theme="colored" icon={false} autoClose={3000} />
     </ThemeProvider>
   );
 }
