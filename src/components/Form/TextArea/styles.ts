@@ -17,7 +17,6 @@ export const TextArea = styled.textarea<{ hasError: boolean }>`
   padding: 1rem;
 
   font-size: 1rem;
-  font-family: Source Sans Pro;
   font-style: normal;
   font-weight: 400;
 

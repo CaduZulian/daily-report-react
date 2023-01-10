@@ -29,6 +29,12 @@ export const Card = styled.div`
   gap: 1rem;
 `;
 
+export const CardItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
 export const Form = styled(_Form)`
   display: flex;
   flex-direction: column;
@@ -55,7 +61,9 @@ export const CheckBoxContainer = styled.div<{ check: boolean }>`
 
     border-radius: 50%;
     background: ${({ theme, check }) =>
-      check ? theme.palette.background.darkGreen : theme.palette.text.lightGray};
+      check
+        ? theme.palette.background.darkGreen
+        : theme.palette.text.lightGray};
 
     > svg {
       width: 50%;
@@ -65,7 +73,7 @@ export const CheckBoxContainer = styled.div<{ check: boolean }>`
 
   > p.check-text {
     width: calc(100% - 21px);
-    margin-left: .5rem;
+    margin-left: 0.5rem;
 
     font-family: sans-serif;
     font-size: 1rem;
@@ -83,4 +91,40 @@ export const ButtonsGroup = styled.div`
   button {
     width: fit-content;
   }
-`
+`;
+
+export const Title = styled.span`
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  color: ${({ theme }) => theme.palette.text.dark};
+`;
+
+export const LineTitle = styled.span`
+  font-size: 1rem;
+  font-weight: 600;
+
+  color: ${({ theme }) => theme.palette.text.dark};
+`;
+
+export const LineValue = styled.span`
+  font-size: 1rem;
+  font-weight: 400;
+
+  color: ${({ theme }) => theme.palette.text.dark};
+`;
+
+export const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const ListItem = styled.li`
+  font-size: 1rem;
+  font-weight: 400;
+
+  color: ${({ theme }) => theme.palette.text.dark};
+`;

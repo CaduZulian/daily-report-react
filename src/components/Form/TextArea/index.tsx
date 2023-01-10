@@ -10,6 +10,7 @@ interface ITextArea extends React.HTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   autoFocus?: boolean;
   value?: string;
+  disabled?: boolean;
 }
 
 export default function TextArea({
