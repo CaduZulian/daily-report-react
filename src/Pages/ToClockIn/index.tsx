@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { useEffect } from "react";
 
 import { Container, Row } from "./styles";
 
@@ -7,29 +6,11 @@ import { Container, Row } from "./styles";
 import { CardForm } from "./components/CardForm";
 import { CardDetails } from "./components/CardDetails";
 
-export interface DailyReport {
-  currentDate: string;
-  entry: Array<{ horary: string }>;
-  leaves: Array<{ horary: string }>;
-  hoursInDay?: number;
-  reportedActivities?: string;
-  comments?: string;
-}
+// contexts
+import { useForm } from "@/context/useForm";
 
 export const ToClockIn = () => {
-  const [reportsInDay, setReportsInDay] = useState<DailyReport | null>(null);
-  const [checkIsOfficeHourFinished, setCheckIsOfficeHourFinished] =
-    useState(false);
-
-  function getReportsInDay(day: Date) {
-    const date = format(day, "dd/MM/yyyy");
-
-    setReportsInDay(
-      localStorage.getItem(date)
-        ? JSON.parse(localStorage.getItem(date)!)
-        : null
-    );
-  }
+  const { getReportsInDay } = useForm();
 
   useEffect(() => {
     getReportsInDay(new Date());
@@ -38,14 +19,9 @@ export const ToClockIn = () => {
   return (
     <Container>
       <Row>
-        <CardDetails reportsInDay={reportsInDay} />
+        <CardDetails />
 
-        <CardForm
-          reportsInDay={reportsInDay}
-          getReportsInDay={getReportsInDay}
-          checkIsOfficeHourFinished={checkIsOfficeHourFinished}
-          setCheckIsOfficeHourFinished={setCheckIsOfficeHourFinished}
-        />
+        <CardForm />
       </Row>
     </Container>
   );

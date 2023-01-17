@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Main } from "./App.style";
@@ -12,29 +13,33 @@ import GlobalStyles from "./styles/global";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 
-// toast
-import { ToastContainer } from "react-toastify";
-
 // pages
 import { Home } from "./Pages/Home";
 import { ToClockIn } from "./Pages/ToClockIn";
 
+// providers
+import { FormProvider, DownloadProvider } from "./context";
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Header />
+    <FormProvider>
+      <DownloadProvider>
+        <ThemeProvider theme={theme}>
+          <Header />
 
-      <Main>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/bater-ponto" element={<ToClockIn />} />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
-      </Main>
+          <Main>
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/bater-ponto" element={<ToClockIn />} />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </Main>
 
-      <GlobalStyles />
-      <ToastContainer theme="colored" icon={false} autoClose={3000} />
-    </ThemeProvider>
+          <GlobalStyles />
+          <ToastContainer theme="colored" icon={false} autoClose={3000} />
+        </ThemeProvider>
+      </DownloadProvider>
+    </FormProvider>
   );
 }
 

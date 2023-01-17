@@ -13,13 +13,13 @@ interface ITextArea extends React.HTMLAttributes<HTMLTextAreaElement> {
   disabled?: boolean;
 }
 
-export default function TextArea({
+export const TextArea = ({
   name,
   label,
   className,
   autoFocus,
   ...rest
-}: ITextArea) {
+}: ITextArea) => {
   const textareaRef: any = useRef(null);
   const { registerField, fieldName, defaultValue, error } = useField(name);
 

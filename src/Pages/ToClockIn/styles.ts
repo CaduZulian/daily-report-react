@@ -44,45 +44,6 @@ export const Form = styled(_Form)`
   gap: 1rem;
 `;
 
-export const CheckBoxContainer = styled.div<{ check: boolean }>`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  cursor: pointer;
-
-  > div.checkbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 16px;
-    height: 16px;
-
-    border-radius: 50%;
-    background: ${({ theme, check }) =>
-      check
-        ? theme.palette.background.darkGreen
-        : theme.palette.text.lightGray};
-
-    > svg {
-      width: 50%;
-      color: #ffffff;
-    }
-  }
-
-  > p.check-text {
-    width: calc(100% - 21px);
-    margin-left: 0.5rem;
-
-    font-family: sans-serif;
-    font-size: 1rem;
-    line-height: 140%;
-
-    color: ${({ theme }) => theme.palette.text.dark};
-  }
-`;
-
 export const ButtonsGroup = styled.div`
   display: flex;
   justify-content: flex-end;

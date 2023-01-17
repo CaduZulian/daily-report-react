@@ -1,74 +1,23 @@
-import { useRef } from "react";
-import { FaCheck } from "react-icons/fa";
-import { toast } from "react-toastify";
-import { format } from "date-fns";
+import { useRef, useState } from "react";
 
-import { ButtonsGroup, Card, CheckBoxContainer, Form } from "../../styles";
+import { ButtonsGroup, Card, Form } from "../../styles";
+
+// contexts
+import { useForm } from "@/context/useForm";
 
 // components
-import { Button } from "../../../../components/Button";
-import TextArea from "../../../../components/Form/TextArea";
-
-// types
-import { DailyReport } from "../..";
+import { TextArea } from "@/components/Form";
+import { Checkbox, Button } from "@/components";
 
 // validators
 import validateForm from "../../validators";
 
-interface ICardForm {
-  reportsInDay: DailyReport | null;
-  getReportsInDay: (params: Date) => void;
-  checkIsOfficeHourFinished: boolean;
-  setCheckIsOfficeHourFinished: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const CardForm = ({
-  reportsInDay,
-  getReportsInDay,
-  checkIsOfficeHourFinished,
-  setCheckIsOfficeHourFinished,
-}: ICardForm) => {
+export const CardForm = () => {
   let formRef = useRef(null);
+  const { reportsInDay, uploadData, generateTxtFile } = useForm();
 
-  function getHoursInDay(
-    entry: DailyReport["entry"],
-    leaves: DailyReport["leaves"]
-  ) {
-    let result;
-
-    if (reportsInDay) {
-      for (let i = 0; i < leaves.length; i++) {
-        let currentEntry = entry[i].horary
-          .split(":")
-          .map((item) => Number(item));
-        let currentLeave = leaves[i].horary
-          .split(":")
-          .map((item) => Number(item));
-
-        const currentEntryMilliseconds = new Date().setHours(
-          currentEntry[0],
-          currentEntry[1],
-          0,
-          0
-        );
-        const currentLeavesMilliseconds = new Date().setHours(
-          currentLeave[0],
-          currentLeave[1],
-          0,
-          0
-        );
-
-        result = result
-          ? new Date(currentLeavesMilliseconds).getTime() -
-            new Date(currentEntryMilliseconds).getTime() +
-            result
-          : new Date(currentLeavesMilliseconds).getTime() -
-            new Date(currentEntryMilliseconds).getTime();
-      }
-    }
-
-    return result;
-  }
+  const [checkIsOfficeHourFinished, setCheckIsOfficeHourFinished] =
+  useState(false);
 
   async function handleSubmit(data: { [key: string]: string }) {
     if (
@@ -80,53 +29,11 @@ export const CardForm = ({
     )
       return;
 
-    let formattedData: DailyReport;
+    const response = uploadData(data);
 
-    const date = format(new Date(), "dd/MM/yyyy");
-    let entry: DailyReport["entry"] = [];
-    let leaves: DailyReport["leaves"] = [];
-    let hoursInDay: DailyReport["hoursInDay"];
-
-    if (reportsInDay) {
-      if (reportsInDay.entry.length > reportsInDay.leaves.length) {
-        entry = reportsInDay.entry;
-        leaves = [
-          ...reportsInDay?.leaves,
-          { horary: format(new Date(), "HH:mm") },
-        ];
-
-        hoursInDay = getHoursInDay(entry, leaves);
-      } else {
-        entry = [
-          ...reportsInDay?.entry,
-          { horary: format(new Date(), "HH:mm") },
-        ];
-        leaves = reportsInDay.leaves;
-
-        hoursInDay = reportsInDay.hoursInDay;
-      }
-
-      formattedData = {
-        ...data,
-        currentDate: reportsInDay.currentDate,
-        entry,
-        leaves,
-        hoursInDay,
-      };
-    } else {
-      entry = [{ horary: format(new Date(), "HH:mm") }];
-
-      formattedData = {
-        ...data,
-        currentDate: date,
-        entry,
-        leaves,
-      };
+    if (reportsInDay?.reportedActivities && checkIsOfficeHourFinished) {
+      generateTxtFile(response);
     }
-
-    localStorage.setItem(date, JSON.stringify(formattedData));
-    toast.success(`Relatório ${!reportsInDay ? "Criado" : "Atualizado"}!`);
-    getReportsInDay(new Date());
   }
 
   return (
@@ -146,15 +53,11 @@ export const CardForm = ({
           disabled={!checkIsOfficeHourFinished}
         />
 
-        <CheckBoxContainer
-          check={checkIsOfficeHourFinished}
-          onClick={() => setCheckIsOfficeHourFinished((state) => !state)}
-        >
-          <div className="checkbox">
-            {checkIsOfficeHourFinished && <FaCheck />}
-          </div>
-          <p className="check-text">Fim de expediente?</p>
-        </CheckBoxContainer>
+        <Checkbox
+          checked={checkIsOfficeHourFinished}
+          disabled={reportsInDay?.entry.length === reportsInDay?.leaves.length}
+          onClick={(e) => setCheckIsOfficeHourFinished(e)}
+        />
 
         <ButtonsGroup>
           <Button>Enviar</Button>

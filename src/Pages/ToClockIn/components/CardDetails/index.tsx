@@ -10,14 +10,12 @@ import {
   Title,
 } from "../../styles";
 
-// types
-import { DailyReport } from "../..";
+// contexts
+import { useForm } from "@/context/useForm";
 
-interface ICardDetails {
-  reportsInDay: DailyReport | null;
-}
+export const CardDetails = () => {
+  const { reportsInDay } = useForm();
 
-export const CardDetails = ({ reportsInDay }: ICardDetails) => {
   return (
     <Card>
       <Title>
