@@ -47,7 +47,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
       fileData +
       `${data?.leaves
         .map(({ horary }, index) => {
-          return `${index + 1}º entrada: ${horary}\n`;
+          return `${index + 1}º saída: ${horary}\n`;
         })
         .join("")}\n`;
 
