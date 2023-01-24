@@ -31,7 +31,7 @@ export const CardForm = () => {
 
     const response = uploadData(data);
 
-    if (reportsInDay?.reportedActivities && checkIsOfficeHourFinished) {
+    if (response?.reportedActivities && checkIsOfficeHourFinished) {
       generateTxtFile(response);
     }
   }
