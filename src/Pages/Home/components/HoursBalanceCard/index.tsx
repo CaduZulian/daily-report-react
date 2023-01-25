@@ -1,9 +1,9 @@
-import { useDownload } from "@/context";
-import { DailyReport } from "@/context/useForm/models";
 import "chart.js/auto";
 import { format } from "date-fns";
 import { Doughnut } from "react-chartjs-2";
-import theme from "../../../../../styles/theme";
+
+import theme from "../../../../styles/theme";
+import { Card } from "../../styles";
 import {
   CardsGroup,
   ChartsGroup,
@@ -11,7 +11,11 @@ import {
   WorkedHoursCard,
 } from "./styles";
 
-export const HoursBalanceChart = () => {
+// context
+import { useDownload } from "@/context";
+import { DailyReport } from "@/context/useForm/models";
+
+export const HoursBalanceCard = () => {
   const { getDaysOfMonth, getDaysOfWeek } = useDownload();
 
   function getData(type: string) {
@@ -29,7 +33,7 @@ export const HoursBalanceChart = () => {
     let totalHours = 0;
 
     if (type === "weekly") {
-      totalHours = 8 * dayOfPeriod;
+      totalHours = 40;
     } else if (type === "monthly") {
       totalHours = 168;
     }
@@ -90,62 +94,66 @@ export const HoursBalanceChart = () => {
   };
 
   return (
-    <ChartsGroup>
-      <div>
-        <Doughnut
-          options={{
-            ...config,
-            plugins: {
-              ...config.plugins,
-              title: {
-                ...config.plugins.title,
-                text: "Saldo de horas (semanal)",
+    <Card>
+      <ChartsGroup>
+        <div>
+          <Doughnut
+            options={{
+              ...config,
+              plugins: {
+                ...config.plugins,
+                title: {
+                  ...config.plugins.title,
+                  text: "Saldo de horas (semanal)",
+                },
               },
-            },
-          }}
-          data={{
-            ...data,
-            datasets: [{ ...data.datasets[0], data: getData("weekly").data }],
-          }}
-        />
+            }}
+            data={{
+              ...data,
+              datasets: [{ ...data.datasets[0], data: getData("weekly").data }],
+            }}
+          />
 
-        <CardsGroup>
-          <WorkedHoursCard>
-            {getData("weekly").workedHours} horas trabalhadas
-          </WorkedHoursCard>
-          <ExpectedHoursCard>
-            {getData("weekly").totalHours} horas previstas
-          </ExpectedHoursCard>
-        </CardsGroup>
-      </div>
+          <CardsGroup>
+            <WorkedHoursCard>
+              {getData("weekly").workedHours} horas trabalhadas
+            </WorkedHoursCard>
+            <ExpectedHoursCard>
+              {getData("weekly").totalHours} horas previstas
+            </ExpectedHoursCard>
+          </CardsGroup>
+        </div>
 
-      <div>
-        <Doughnut
-          options={{
-            ...config,
-            plugins: {
-              ...config.plugins,
-              title: {
-                ...config.plugins.title,
-                text: "Saldo de horas (mensal)",
+        <div>
+          <Doughnut
+            options={{
+              ...config,
+              plugins: {
+                ...config.plugins,
+                title: {
+                  ...config.plugins.title,
+                  text: "Saldo de horas (mensal)",
+                },
               },
-            },
-          }}
-          data={{
-            ...data,
-            datasets: [{ ...data.datasets[0], data: getData("monthly").data }],
-          }}
-        />
+            }}
+            data={{
+              ...data,
+              datasets: [
+                { ...data.datasets[0], data: getData("monthly").data },
+              ],
+            }}
+          />
 
-        <CardsGroup>
-          <WorkedHoursCard>
-            {getData("monthly").workedHours} horas trabalhadas
-          </WorkedHoursCard>
-          <ExpectedHoursCard>
-            {getData("monthly").totalHours} horas previstas
-          </ExpectedHoursCard>
-        </CardsGroup>
-      </div>
-    </ChartsGroup>
+          <CardsGroup>
+            <WorkedHoursCard>
+              {getData("monthly").workedHours} horas trabalhadas
+            </WorkedHoursCard>
+            <ExpectedHoursCard>
+              {getData("monthly").totalHours} horas previstas
+            </ExpectedHoursCard>
+          </CardsGroup>
+        </div>
+      </ChartsGroup>
+    </Card>
   );
 };

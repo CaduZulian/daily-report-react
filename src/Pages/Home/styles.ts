@@ -34,3 +34,11 @@ export const Card = styled.div`
   padding: 1.25rem;
   gap: 1rem;
 `;
+
+export const Title = styled.span`
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: bold;
+
+  color: #666;
+`;

@@ -1,5 +1,6 @@
 import "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import { format } from "date-fns";
 
 import theme from "@/styles/theme";
 
@@ -11,7 +12,7 @@ interface IChart {
   currentPeriod: number;
 }
 
-export const Chart = ({currentPeriod}: IChart) => {
+export const Chart = ({ currentPeriod }: IChart) => {
   const { getDaysOfMonth, getDaysOfWeek } = useDownload();
 
   function getData() {
@@ -19,12 +20,45 @@ export const Chart = ({currentPeriod}: IChart) => {
 
     let data: number[] = [];
 
-    for (let date of dates) {
-      if (localStorage.getItem(date)) {
-        const report: DailyReport = JSON.parse(localStorage.getItem(date)!);
+    if (dates.includes("Janeiro")) {
+      for (let monthIndex = 0; monthIndex < dates.length; monthIndex++) {
+        const daysOfMonth = new Date(
+          new Date().getFullYear(),
+          monthIndex + 1,
+          0
+        ).getDate();
 
-        if (report?.hoursInDay) {
-          data.push(report?.hoursInDay / 1000 / 60 - 8 * 60);
+        let hoursInMonth = 0;
+
+        for (let day = 1; day <= daysOfMonth; day++) {
+          const date = format(
+            new Date(new Date().getFullYear(), monthIndex, day),
+            "dd/MM/yyyy"
+          );
+
+          if (localStorage.getItem(date)) {
+            const report: DailyReport = JSON.parse(localStorage.getItem(date)!);
+
+            if (report?.hoursInDay) {
+              hoursInMonth = hoursInMonth + report?.hoursInDay / 1000 / 60 / 60;
+            }
+          }
+        }
+
+        if (hoursInMonth - 168 > -168) {
+          data[monthIndex] = hoursInMonth - 168;
+        }
+      }
+    } else {
+      for (let i = 0; i < dates.length; i++) {
+        if (localStorage.getItem(dates[i])) {
+          const report: DailyReport = JSON.parse(
+            localStorage.getItem(dates[i])!
+          );
+
+          if (report?.hoursInDay) {
+            data[i] = report?.hoursInDay / 1000 / 60 - 8 * 60;
+          }
         }
       }
     }
@@ -86,13 +120,6 @@ export const Chart = ({currentPeriod}: IChart) => {
       },
       title: {
         display: false,
-        text: "Balanço de horas",
-        font: {
-          size: 18,
-        },
-        padding: {
-          bottom: 20,
-        },
       },
     },
     scales: {
@@ -100,24 +127,26 @@ export const Chart = ({currentPeriod}: IChart) => {
         display: true,
         title: {
           display: true,
-          text: "Período (dias / meses)",
+          text: `Período (${
+            getLabels().includes("Janeiro") ? "meses" : "dias"
+          })`,
         },
       },
       y: {
         display: true,
         title: {
           display: true,
-          text: "Tempo (minutos)",
+          text: `Tempo (${
+            getLabels().includes("Janeiro") ? "horas" : "minutos"
+          })`,
         },
         ticks: {
           beginAtZero: true,
-          stepSize: 60,
+          stepSize: getLabels().includes("Janeiro") ? 1 : 60,
         },
       },
     },
   };
 
-  return (
-    <Line options={config} data={data} />
-  )
-}
+  return <Line options={config} data={data} />;
+};

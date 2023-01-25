@@ -1,22 +1,20 @@
-import { Card, Column, Container, Row } from "./styles";
+import { Column, Container, Row } from "./styles";
 
 // components
-import { HoursBalanceChart } from "./components/charts/HoursBalance";
+import { HoursBalanceCard } from "./components/HoursBalanceCard";
 import { OvertimeCard } from "./components/OvertimeCard";
-
+import { TableCard } from "./components/TableCard";
 
 export const Home = () => {
   return (
     <Container>
-      <Row style={{paddingBottom: '1.25rem'}}>
-        <Card></Card>
+      <Row style={{ paddingBottom: "1.25rem" }}>
+        <TableCard />
 
         <Column>
           <OvertimeCard />
 
-          <Card>
-            <HoursBalanceChart />
-          </Card>
+          <HoursBalanceCard />
         </Column>
       </Row>
     </Container>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { Container, Title } from "./styles";
-import { Card } from "../../styles";
+import { Container } from "./styles";
+import { Card, Title } from "../../styles";
 
 // components
 import { Chart } from "./components/Chart";
@@ -14,18 +14,17 @@ export const OvertimeCard = () => {
 
   return (
     <Card>
+      <Container>
+        <Title>Balanço de horas</Title>
 
-    <Container>
-      <Title>Balanço de horas</Title>
+        <Steps
+          periods={periods}
+          currentPeriod={currentPeriod}
+          setCurrentPeriod={setCurrentPeriod}
+        />
 
-      <Steps
-        periods={periods}
-        currentPeriod={currentPeriod}
-        setCurrentPeriod={setCurrentPeriod}
-      />
-
-      <Chart currentPeriod={currentPeriod} />
-    </Container>
+        <Chart currentPeriod={currentPeriod} />
+      </Container>
     </Card>
   );
 };

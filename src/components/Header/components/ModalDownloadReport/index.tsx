@@ -24,7 +24,9 @@ export const ModalDownloadReport = ({
       <Container>
         <Button
           onClick={() => {
-            downloadOfPeriod("daily", generateTxtFile);
+            downloadOfPeriod("daily", {
+              downloadFunction: generateTxtFile,
+            });
             onClose();
           }}
         >
@@ -33,7 +35,9 @@ export const ModalDownloadReport = ({
 
         <Button
           onClick={() => {
-            downloadOfPeriod("weekly", generateTxtFile);
+            downloadOfPeriod("weekly", {
+              downloadFunction: generateTxtFile,
+            });
             onClose();
           }}
         >
@@ -42,7 +46,9 @@ export const ModalDownloadReport = ({
 
         <Button
           onClick={() => {
-            downloadOfPeriod("monthly", generateTxtFile);
+            downloadOfPeriod("monthly", {
+              downloadFunction: generateTxtFile,
+            });
             onClose();
           }}
         >

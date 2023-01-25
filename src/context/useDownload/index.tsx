@@ -8,8 +8,7 @@ import {
 } from "date-fns";
 
 // types
-import { iDownload } from "./models";
-import { DailyReport } from "../useForm/models";
+import { iDownload, IDownloadOfPeriod } from "./models";
 
 const DownloadContext = createContext({} as iDownload);
 
@@ -58,11 +57,11 @@ const DownloadProvider = ({ children }: DownloadProviderProps) => {
 
   function downloadOfPeriod(
     period: "daily" | "weekly" | "monthly",
-    downloadFunction: (props: DailyReport) => void
+    { downloadFunction, date }: IDownloadOfPeriod
   ) {
     const dates =
       period === "daily"
-        ? [format(new Date(), "dd/MM/yyyy")]
+        ? [date ?? format(new Date(), "dd/MM/yyyy")]
         : period === "weekly"
         ? getDaysOfWeek()
         : period === "monthly"
@@ -81,7 +80,7 @@ const DownloadProvider = ({ children }: DownloadProviderProps) => {
       value={{
         getDaysOfWeek,
         getDaysOfMonth,
-        downloadOfPeriod
+        downloadOfPeriod,
       }}
     >
       {children}
