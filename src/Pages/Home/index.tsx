@@ -1,23 +1,24 @@
-import { Card, Container, Row } from "./styles"
+import { Card, Column, Container, Row } from "./styles";
+
+// components
+import { HoursBalanceChart } from "./components/charts/HoursBalance";
+import { OvertimeCard } from "./components/OvertimeCard";
+
 
 export const Home = () => {
   return (
     <Container>
       <Row>
-        <Card>
-          
-        </Card>
-        
-        <Card>
+        <Card></Card>
 
-        </Card>
-      </Row>
+        <Column>
+          <OvertimeCard />
 
-      <Row>
-        <Card>
-          
-        </Card>
+          <Card>
+            <HoursBalanceChart />
+          </Card>
+        </Column>
       </Row>
     </Container>
-  )
-}
+  );
+};

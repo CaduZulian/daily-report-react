@@ -15,6 +15,13 @@ export const Row = styled.div`
   gap: 1rem;
 `
 
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+`
+
 export const Card = styled.div`
   display: flex;
   flex-direction: column;

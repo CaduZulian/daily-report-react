@@ -22,7 +22,7 @@ const theme = {
       lightBlue: '#F1F5FD',
       green: '#066F53',
       lightGreen: '#CCF3E9',
-      red: '#FF3629',
+      red: '#B2251C',
       lightRed: '#FFF0EF',
       orange: '#AD6500',
       lightOrange: '#FCF7E9',
