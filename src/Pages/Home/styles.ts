@@ -7,20 +7,20 @@ export const Container = styled.div`
 
   padding: 1.25rem;
   gap: 1rem;
-`
+`;
 
 export const Row = styled.div`
   display: flex;
 
   gap: 1rem;
-`
+`;
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
 
   gap: 1rem;
-`
+`;
 
 export const Card = styled.div`
   display: flex;
@@ -28,9 +28,9 @@ export const Card = styled.div`
   width: 100%;
   height: fit-content;
 
-  background-color: ${({theme}) => theme.palette.background.white};
+  background-color: ${({ theme }) => theme.palette.background.white};
   border-radius: 0.25rem;
 
   padding: 1.25rem;
   gap: 1rem;
-`
+`;

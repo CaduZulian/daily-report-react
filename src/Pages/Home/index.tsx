@@ -8,7 +8,7 @@ import { OvertimeCard } from "./components/OvertimeCard";
 export const Home = () => {
   return (
     <Container>
-      <Row>
+      <Row style={{paddingBottom: '1.25rem'}}>
         <Card></Card>
 
         <Column>
