@@ -7,6 +7,9 @@ export const Container = styled.div`
 
   padding: 1.25rem;
   gap: 1rem;
+
+  // for ultra wide monitors
+  max-width: 2000px;
 `;
 
 export const Row = styled.div`

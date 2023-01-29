@@ -1,8 +1,10 @@
 import { addHours, format } from "date-fns";
+import HelperIcon from "../../../../assets/icons/help-circle.svg";
 
 import {
   Card,
   CardItem,
+  Helper,
   LineTitle,
   LineValue,
   List,
@@ -14,10 +16,21 @@ import {
 import { useForm } from "@/context/useForm";
 
 export const CardDetails = () => {
-  const { reportsInDay } = useForm();
+  const { reportsInDay, leaveTime } = useForm();
 
   return (
     <Card>
+      <Helper
+        data-tooltip={
+          !leaveTime
+            ? "Assim que você registrar uma nova entrada, uma sugestão de horário de saída será exibida aqui"
+            : `Para atingir as 8 horas diárias, você deverá sair as ${leaveTime}`
+        }
+        data-flow="bottom"
+      >
+        <img src={HelperIcon} alt="ajuda" />
+      </Helper>
+
       <Title>
         {reportsInDay?.currentDate ?? format(new Date(), "dd/MM/yyyy")}
       </Title>

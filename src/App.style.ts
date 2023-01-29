@@ -6,6 +6,8 @@ export const Main = styled.main`
   height: calc(100vh - 72px);
   background: ${({ theme }) => theme.palette.background.lightGray};
 
+  justify-content: center;
+
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;

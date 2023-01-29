@@ -20,14 +20,11 @@ export const HoursBalanceCard = () => {
 
   function getData(type: string) {
     let dates: string[] = [];
-    let dayOfPeriod = 1;
 
     if (type === "weekly") {
       dates = getDaysOfWeek();
-      dayOfPeriod = dates.indexOf(format(new Date(), "dd/MM/yyyy")) + 1;
     } else if (type === "monthly") {
       dates = getDaysOfMonth();
-      dayOfPeriod = new Date().getDate();
     }
 
     let totalHours = 0;

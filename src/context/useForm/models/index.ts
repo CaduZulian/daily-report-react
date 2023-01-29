@@ -12,4 +12,5 @@ export interface IForm {
   getReportsInDay: (day: Date) => void;
   generateTxtFile: (data: DailyReport) => void;
   uploadData: (data: { [key: string]: string }) => DailyReport;
+  leaveTime: string
 }

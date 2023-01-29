@@ -2,13 +2,24 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   height: fit-content;
   background-color: ${({ theme }) => theme.palette.main.blue};
 
   padding: 1rem;
+
+  div.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    // for ultra wide monitors
+    max-width: 2000px;
+  }
 `;
 
 export const Logo = styled.div`

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ButtonsGroup, HeaderContainer, Logo } from "./styles";
 
@@ -14,29 +14,31 @@ export const Header = () => {
   const [modalDownloadReportIsOpen, setModalDownloadReportIsOpen] =
     useState(false);
 
-  const navigate = useNavigate();
-
   return (
-    <>
-      <HeaderContainer>
-        <Logo onClick={() => navigate("/home")}>
-          <img src={LogoIcon} alt="logo" />
-          <span>Relatório diário</span>
-        </Logo>
+    <HeaderContainer>
+      <div className="container">
+        <Link to="/home">
+          <Logo>
+            <img src={LogoIcon} alt="logo" />
+            <span>Relatório diário</span>
+          </Logo>
+        </Link>
 
         <ButtonsGroup>
           <Button onClick={() => setModalDownloadReportIsOpen(true)}>
             Baixar relatório
           </Button>
 
-          <Button onClick={() => navigate("/bater-ponto")}>Bater ponto</Button>
+          <Link to="/bater-ponto">
+            <Button tabIndex={-1}>Bater ponto</Button>
+          </Link>
         </ButtonsGroup>
-      </HeaderContainer>
+      </div>
 
       <ModalDownloadReport
         open={modalDownloadReportIsOpen}
         onClose={() => setModalDownloadReportIsOpen(false)}
       />
-    </>
+    </HeaderContainer>
   );
 };

@@ -6,19 +6,26 @@ interface ICheckbox {
   checked: boolean;
   disabled: boolean;
   onClick: (event: boolean) => void;
+  label?: string;
 }
 
-export const Checkbox = ({ checked, disabled, onClick }: ICheckbox) => {
+export const Checkbox = ({ checked, disabled, onClick, label }: ICheckbox) => {
   useEffect(() => {
     if (disabled && checked) {
-      onClick(false)
+      onClick(false);
     }
-  }, [disabled])
+  }, [disabled]);
 
   return (
-    <CheckBoxContainer check={checked} disabled={disabled} onClick={() => !disabled && onClick(!checked)}>
+    <CheckBoxContainer
+      tabIndex={0}
+      check={checked}
+      disabled={disabled}
+      onClick={() => !disabled && onClick(!checked)}
+      onKeyPress={(e) => e.key === "Enter" && !disabled && onClick(!checked)}
+    >
       <div className="checkbox">{checked && <FaCheck />}</div>
-      <p className="check-text">Fim de expediente?</p>
+      <p className="check-text">{label}</p>
     </CheckBoxContainer>
   );
 };

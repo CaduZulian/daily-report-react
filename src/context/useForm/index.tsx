@@ -1,10 +1,10 @@
-import { download } from '@/hooks/download';
-import { addHours, format } from 'date-fns';
-import { createContext, useContext, useState } from 'react';
-import { toast } from 'react-toastify';
+import { download } from "@/hooks/download";
+import { addHours, format } from "date-fns";
+import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 // types
-import { DailyReport, IForm } from './models';
+import { DailyReport, IForm } from "./models";
 
 const FormContext = createContext({} as IForm);
 
@@ -14,6 +14,51 @@ interface FormProviderProps {
 
 const FormProvider = ({ children }: FormProviderProps) => {
   const [reportsInDay, setReportsInDay] = useState<DailyReport | null>(null);
+  const [leaveTime, setLeaveTime] = useState("");
+
+  useEffect(() => {
+    if (reportsInDay) {
+      if (reportsInDay.hoursInDay) {
+        if (reportsInDay.entry.length === reportsInDay.leaves.length) {
+          setLeaveTime("");
+        } else {
+          const date = new Date().setHours(
+            Number(
+              reportsInDay.entry[reportsInDay.entry.length - 1].horary.split(
+                ":"
+              )[0]
+            ),
+            Number(
+              reportsInDay.entry[reportsInDay.entry.length - 1].horary.split(
+                ":"
+              )[1]
+            )
+          );
+
+          setLeaveTime(
+            format(
+              new Date(
+                addHours(
+                  date,
+                  8 - (8 * 60 * 60 * 1000 - reportsInDay.hoursInDay)
+                )
+              ),
+              "HH:mm"
+            )
+          );
+        }
+      } else {
+        if (reportsInDay.entry.length === 1) {
+          const date = new Date().setHours(
+            Number(reportsInDay.entry[0].horary.split(":")[0]),
+            Number(reportsInDay.entry[0].horary.split(":")[1])
+          );
+
+          setLeaveTime(format(new Date(addHours(date, 8)), "HH:mm"));
+        }
+      }
+    }
+  }, [reportsInDay]);
 
   function getReportsInDay(day: Date) {
     const date = format(day, "dd/MM/yyyy");
@@ -168,7 +213,7 @@ const FormProvider = ({ children }: FormProviderProps) => {
     toast.success(`Relatório ${!reportsInDay ? "Criado" : "Atualizado"}!`);
     getReportsInDay(new Date());
 
-    return formattedData
+    return formattedData;
   }
 
   return (
@@ -177,7 +222,8 @@ const FormProvider = ({ children }: FormProviderProps) => {
         reportsInDay,
         getReportsInDay,
         generateTxtFile,
-        uploadData
+        uploadData,
+        leaveTime,
       }}
     >
       {children}

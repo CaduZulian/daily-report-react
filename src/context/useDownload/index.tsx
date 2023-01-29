@@ -21,19 +21,18 @@ const DownloadProvider = ({ children }: DownloadProviderProps) => {
     const currentDate = new Date();
 
     const startDay = startOfWeek(currentDate, { weekStartsOn: 0 });
-    const endDay = endOfWeek(currentDate, { weekStartsOn: 0 });
 
-    let constDaysOfWeek: string[] = [format(startDay, "dd/MM/yyyy")];
+    let daysOfWeek: string[] = [];
 
-    for (let i = startDay.getDate(); i <= endDay.getDate(); i++) {
-      if (
-        !constDaysOfWeek.includes(format(new Date().setDate(i), "dd/MM/yyyy"))
-      ) {
-        constDaysOfWeek.push(format(new Date().setDate(i), "dd/MM/yyyy"));
-      }
+    let startWeekDate = startDay.getDate();
+
+    for (let i = 0; i <= 6; i++) {
+      daysOfWeek.push(
+        format(new Date().setDate(startWeekDate + i), "dd/MM/yyyy")
+      );
     }
 
-    return constDaysOfWeek;
+    return daysOfWeek;
   }
 
   function getDaysOfMonth() {
@@ -42,17 +41,15 @@ const DownloadProvider = ({ children }: DownloadProviderProps) => {
     const startDay = startOfMonth(currentDate);
     const endDay = endOfMonth(currentDate);
 
-    let constDaysOfMonth: any = [format(startDay, "dd/MM/yyyy")];
+    let daysOfMonth: any = [format(startDay, "dd/MM/yyyy")];
 
     for (let i = startDay.getDate(); i <= endDay.getDate(); i++) {
-      if (
-        !constDaysOfMonth.includes(format(new Date().setDate(i), "dd/MM/yyyy"))
-      ) {
-        constDaysOfMonth.push(format(new Date().setDate(i), "dd/MM/yyyy"));
+      if (!daysOfMonth.includes(format(new Date().setDate(i), "dd/MM/yyyy"))) {
+        daysOfMonth.push(format(new Date().setDate(i), "dd/MM/yyyy"));
       }
     }
 
-    return constDaysOfMonth;
+    return daysOfMonth;
   }
 
   function downloadOfPeriod(

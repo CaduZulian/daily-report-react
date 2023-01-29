@@ -17,7 +17,7 @@ export const CardForm = () => {
   const { reportsInDay, uploadData, generateTxtFile } = useForm();
 
   const [checkIsOfficeHourFinished, setCheckIsOfficeHourFinished] =
-  useState(false);
+    useState(false);
 
   async function handleSubmit(data: { [key: string]: string }) {
     if (
@@ -54,6 +54,7 @@ export const CardForm = () => {
         />
 
         <Checkbox
+          label="Fim de expediente?"
           checked={checkIsOfficeHourFinished}
           disabled={reportsInDay?.entry.length === reportsInDay?.leaves.length}
           onClick={(e) => setCheckIsOfficeHourFinished(e)}

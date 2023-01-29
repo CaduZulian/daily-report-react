@@ -8,6 +8,8 @@ export const CheckBoxContainer = styled.div<{
   justify-content: flex-start;
   align-items: center;
 
+  width: fit-content;
+
   cursor: ${({ disabled }) => (disabled ? "block" : "pointer")};
 
   > div.checkbox {
@@ -31,7 +33,6 @@ export const CheckBoxContainer = styled.div<{
   }
 
   > p.check-text {
-    width: calc(100% - 21px);
     margin-left: 0.5rem;
 
     font-family: sans-serif;
