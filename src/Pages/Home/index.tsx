@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet";
+
 import { Column, Container, Row } from "./styles";
 
 // components
@@ -8,6 +10,10 @@ import { TableCard } from "./components/TableCard";
 export const Home = () => {
   return (
     <Container>
+      <Helmet>
+        <title>Relatório diário - Home</title>
+      </Helmet>
+
       <Row style={{ paddingBottom: "1.25rem" }}>
         <TableCard />
 

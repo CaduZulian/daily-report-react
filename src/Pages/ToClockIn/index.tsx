@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 import { Container, Row } from "./styles";
 
@@ -18,6 +19,10 @@ export const ToClockIn = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Relatório diário - Bater Ponto</title>
+      </Helmet>
+
       <Row>
         <CardDetails />
 
