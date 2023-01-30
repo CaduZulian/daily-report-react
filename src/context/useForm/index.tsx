@@ -32,17 +32,21 @@ const FormProvider = ({ children }: FormProviderProps) => {
               reportsInDay.entry[reportsInDay.entry.length - 1].horary.split(
                 ":"
               )[1]
-            )
+            ),
+            0,
+            0
           );
 
           setLeaveTime(
             format(
-              new Date(
-                addHours(
-                  date,
-                  8 - (8 * 60 * 60 * 1000 - reportsInDay.hoursInDay)
-                )
-              ),
+              new Date(date).getTime() +
+                ((8 + new Date().getTimezoneOffset() / 60) * 60 * 60 * 1000 -
+                  new Date(
+                    addHours(
+                      new Date(reportsInDay?.hoursInDay),
+                      new Date().getTimezoneOffset() / 60
+                    )
+                  ).getTime()),
               "HH:mm"
             )
           );
