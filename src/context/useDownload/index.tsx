@@ -28,7 +28,7 @@ const DownloadProvider = ({ children }: DownloadProviderProps) => {
 
     for (let i = 0; i <= 6; i++) {
       daysOfWeek.push(
-        format(new Date().setDate(startWeekDate + i), "dd/MM/yyyy")
+        format(new Date(startDay).setDate(startWeekDate + i), "dd/MM/yyyy")
       );
     }
 
