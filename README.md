@@ -1,4 +1,9 @@
 # daily-report-react
+
+<div align="center">
+<img src="github\project-image.png" alt="simple-auto-clicker"/><br />
+</div>
+
 Projeto desenvolvido para auxiliar no controle interno de horário de trabalho, com registro de entrada, saída, atividades desenvolvidas ao longo do dia, relatórios (para download) e gráficos para melhor controle
 
 ## Bibliotecas utilizadas
@@ -11,7 +16,8 @@ Projeto desenvolvido para auxiliar no controle interno de horário de trabalho, 
 
 > Veja o arquivo [package.json](https://github.com/CaduZulian/daily-report-react/blob/master/package.json)
 
-##  Rodando o Front End (cliente)
+## Rodando o Front End (cliente)
+
 ```bash
 # Clone este repositório
 
