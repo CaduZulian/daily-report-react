@@ -1,10 +1,10 @@
 # daily-report-react
 
+Projeto desenvolvido para auxiliar no controle interno de horário de trabalho, com registro de entrada, saída, atividades desenvolvidas ao longo do dia, relatórios (para download) e gráficos para melhor controle
+
 <div align="center">
 <img src="github\project-image.png" alt="simple-auto-clicker"/><br />
 </div>
-
-Projeto desenvolvido para auxiliar no controle interno de horário de trabalho, com registro de entrada, saída, atividades desenvolvidas ao longo do dia, relatórios (para download) e gráficos para melhor controle
 
 ## Bibliotecas utilizadas
 
